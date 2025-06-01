@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Підключення стилів -->
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Document</title>
+  </head>
+  <body>
+ <div class="weather-container">
+    <h1>Прогноз погоди</h1>
+
+    <div class="weather-card">
+      <h2 class="city">Місто</h2>
+      <img class="icon" src="" alt="Іконка погоди">
+      <p class="temp">Температура</p>
+      <p class="cloud">Хмарність</p>
+      <p class="windkph">Вітер</p>
+      <p class="hamidity">Вологість</p>
+    </div>
+
+        <select id="citySelect">
+      <option value="Kyiv">Київ</option>
+      <option value="Lviv">Львів</option>
+      <option value="Odesa">Одеса</option>
+      <option value="Kharkiv">Харків</option>
+      <option value="Dnipro">Дніпро</option>
+    </select>
+
+    <div class="forecast-container">
+  <h3>Прогноз на 14 днів</h3>
+  <div class="forecast-grid" id="forecastGrid"></div>
+</div>
+
+  </div>
+    <script src="script.js"></script>
+  </body>
+</html>
