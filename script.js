@@ -1,11 +1,12 @@
 const apiKey = "21f8c4c234cd480aaf5111440250106";
 const citySelect = document.getElementById("citySelect");
+const search = document.querySelector("#citySelect")
 
 function fetchWeather(city) {
   fetch(`http://api.weatherapi.com/v1/forecast.json?key=21f8c4c234cd480aaf5111440250106&q=${city}&days=14&aqi=no&alerts=no`)
     .then(res => res.json())
     .then(data => {
-        
+
       document.querySelector(".city").textContent = "Місто: " + data.location.name;
       document.querySelector(".temp").textContent = "Температура: " + data.current.temp_c + "°C";
       document.querySelector(".cloud").textContent = "Хмарність: " + data.current.cloud + "%";
@@ -29,15 +30,51 @@ function fetchWeather(city) {
       });
     })
     .catch(err => {
-      alert("Помилка отримання погоди!");
+      // alert("Помилка отримання погоди!");
       console.error(err);
     });
 }
 
 // Ініціалізація з першого міста
-fetchWeather(citySelect.value);
+fetchWeather("Kyiv");
 
 // Слухач події зміни міста
-citySelect.addEventListener("change", () => {
-  fetchWeather(citySelect.value);
+citySelect.addEventListener("input", (e) => {
+  // fetchWeather(e.target.value);
+  fetch("http://api.weatherapi.com/v1/search.json?key=21f8c4c234cd480aaf5111440250106&q=" + e.target.value).then(res=>res.json()).then(data=>{
+    document.querySelector("#city").innerHTML = ""
+    data.forEach(c=>{
+      document.querySelector("#city").innerHTML += `<option value="${c.name}"></option>`
+
+    })
+  })
 });
+
+document.querySelector("#search").addEventListener("click", ()=>{
+  fetchWeather(citySelect.value);
+})
+
+search.addEventListener("submit", (e) => {
+  e.preventDefault()
+  fetchWeather(document.querySelector("#search").value);
+});
+
+// const citySearch = document.getElementById("citySearch");
+
+// citySearch.addEventListener("change", () => {
+//   const city = citySearch.value.trim();
+//   if (city) {
+//     fetchWeather(city);
+//   }
+// });
+
+let forecastState = false
+document.querySelector("#forecast").addEventListener("click", function () {
+  if (forecastState) {
+    document.querySelector(".forecast-grid").style.display = "none"
+    forecastState = false
+  } else {
+    document.querySelector(".forecast-grid").style.display = "grid"
+    forecastState = true
+  }
+})

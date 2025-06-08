@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Підключення стилів -->
-    <link rel="stylesheet" href="style.css" />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.css'
+    integrity='sha512-GmZYQ9SKTnOea030Tbiat0Y+jhnYLIpsGAe6QTnToi8hI2nNbVMETHeK4wm4MuYMQdrc38x+sX77+kVD01eNsQ=='
+    crossorigin='anonymous' />
+  <!-- Підключення стилів -->
+  <link rel="stylesheet" href="style.css" />
 
-    <title>Document</title>
-  </head>
-  <body>
- <div class="weather-container">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="weather-container">
     <h1>Прогноз погоди</h1>
 
     <div class="weather-card">
@@ -22,21 +26,52 @@
       <p class="windkph">Вітер</p>
       <p class="hamidity">Вологість</p>
     </div>
-
-        <select id="citySelect">
+    <!-- 
+    <select c>
+      
       <option value="Kyiv">Київ</option>
       <option value="Lviv">Львів</option>
       <option value="Odesa">Одеса</option>
       <option value="Kharkiv">Харків</option>
       <option value="Dnipro">Дніпро</option>
-    </select>
+    </select> -->
+    <!-- 
+    <form class="search">
+      <input placeholder="Введіть місто.." type="text" name="search" id="search">
+      <button type="submit">Пошук</button>
+    </form> -->
+    <input  id="citySelect" name="search" placeholder="Пошук міста..." />
+    <button id="search"><i class="fas fa-search"></i></button>
+    <datalist id="city">
+      <option value="Kyiv"></option>
+      <option value="Lviv"></option>
+      <option value="Odesa"></option>
+      <option value="Kharkiv"></option>
+      <option value="Dnipro"></option>
+    </datalist>
+
+
+    <!-- <datalist id="city">
+  <option value="Kyiv"></option>
+  <option value="Lviv"></option>
+  <option value="Odesa"></option>
+  <option value="Kharkiv"></option>
+  <option value="Dnipro"></option>
+  <option value="Zaporizhzhia"></option>
+  <option value="Vinnytsia"></option>
+  <option value="Poltava"></option>
+  <option value="Chernihiv"></option>
+</datalist> -->
+
+
 
     <div class="forecast-container">
-  <h3>Прогноз на 14 днів</h3>
-  <div class="forecast-grid" id="forecastGrid"></div>
-</div>
+      <h3 id="forecast">Прогноз на 14 днів</h3>
+      <div class="forecast-grid" id="forecastGrid"></div>
+    </div>
 
   </div>
-    <script src="script.js"></script>
-  </body>
+  <script src="script.js"></script>
+</body>
+
 </html>
