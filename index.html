@@ -10,12 +10,24 @@
     crossorigin='anonymous' />
   <!-- Підключення стилів -->
   <link rel="stylesheet" href="style.css" />
-
+  <script defer src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js'
+    integrity='sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw=='
+    crossorigin='anonymous'></script>
   <title>Document</title>
 </head>
 
 <body>
   <div class="weather-container">
+    <div class="settings-container">
+      <button class="settings"><i class="fas fa-cog"></i></button>
+      <div class="switch-wrapper">
+        <div class="label-text" id="switchLabel">Цельсія</div>
+        <label class="switch">
+          <input type="checkbox" id="toggleColor" checked onchange="updateLabel()">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
     <h1>Прогноз погоди</h1>
 
     <div class="weather-card">
@@ -40,8 +52,10 @@
       <input placeholder="Введіть місто.." type="text" name="search" id="search">
       <button type="submit">Пошук</button>
     </form> -->
-    <input  id="citySelect" name="search" placeholder="Пошук міста..." />
-    <button id="search"><i class="fas fa-search"></i></button>
+    <div class="searchBar">
+      <input id="citySelect" name="search" placeholder="Пошук міста..." />
+      <button id="search"><i class="fas fa-search"></i></button>
+    </div>
     <datalist id="city">
       <option value="Kyiv"></option>
       <option value="Lviv"></option>
@@ -66,12 +80,15 @@
 
 
     <div class="forecast-container">
-      <h3 id="forecast">Прогноз на 14 днів</h3>
+      <h3 id="forecast">Прогноз на 3 дні</h3>
       <div class="forecast-grid" id="forecastGrid"></div>
     </div>
 
   </div>
   <script src="script.js"></script>
+
+
+
 </body>
 
 </html>
