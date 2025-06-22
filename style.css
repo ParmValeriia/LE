@@ -123,6 +123,7 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  position: relative;
 }
 
 h1 {
@@ -310,7 +311,7 @@ h3 {
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: #ff5722;
+      background-color: #0000001d;
       transition: .4s;
       border-radius: 34px;
     }
@@ -328,7 +329,7 @@ h3 {
     }
 
     input:checked + .slider {
-      background-color: #4caf4f;
+      background-color: #0000001d;
     }
 
     input:checked + .slider::before {
@@ -344,3 +345,26 @@ h3 {
       padding: 0.5rem;
       font-size: 1rem;
     }
+
+    .settings-container{
+      margin: 0.5rem;
+      position: fixed;
+      left: 0;
+      top: 0;
+    }
+    
+    .switch-wrapper{
+      position: absolute;
+      top: -1.5rem;
+      left: 2.3rem;
+      /* border: 2px solid #000000; */
+      border-radius: 1rem;
+      padding: 0.5rem;
+      backdrop-filter: blur(25px);
+      /* background-color: rgba(255, 255, 255, 0.158);
+       */
+  
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+
+    } 
+    

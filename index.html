@@ -14,13 +14,21 @@
     integrity='sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw=='
     crossorigin='anonymous'></script>
   <title>Document</title>
+  <!-- CSS Alertify -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+<!-- Можна додати тему (не обов'язково) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+
+<!-- JS Alertify -->
+<script defer src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
 </head>
 
 <body>
   <div class="weather-container">
     <div class="settings-container">
       <button class="settings"><i class="fas fa-cog"></i></button>
-      <div class="switch-wrapper">
+      <div class="switch-wrapper" style=" display: none">
         <div class="label-text" id="switchLabel">Цельсія</div>
         <label class="switch">
           <input type="checkbox" id="toggleColor" checked onchange="updateLabel()">

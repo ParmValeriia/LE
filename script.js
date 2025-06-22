@@ -1,15 +1,18 @@
 const apiKey = "21f8c4c234cd480aaf5111440250106";
 const citySelect = document.getElementById("citySelect");
+let city = "Kyiv"
+let d = true
 const search = document.querySelector("#citySelect")
 
-function fetchWeather(city) {
+function fetchWeather(city, degrees) {
   fetch(`http://api.weatherapi.com/v1/forecast.json?key=21f8c4c234cd480aaf5111440250106&q=${city}&days=14&aqi=no&alerts=no`)
     .then(res => res.json())
     .then(data => {
       document.body.style.background = temperatureToColor(data.current.temp_c)
+      document.querySelector(".switch-wrapper").style.background = temperatureToColor(data.current.temp_c)
       console.log(data)
       document.querySelector(".city").innerHTML = "Місто: " + data.location.name;
-      document.querySelector(".temp").innerHTML = "<span>Температура: </span><span></span><span>" + data.current.temp_c + "°C" + "</span>";
+      document.querySelector(".temp").innerHTML = "<span>Температура: </span><span></span><span>" + (degrees ? (data.current.temp_c + "°C") : (data.current.temp_f + "°F")) + "</span>";
       document.querySelector(".cloud").innerHTML = "<span>Хмарність: </span><span></span><span>" + data.current.cloud + "%" + "</span>";
       document.querySelector(".windkph").innerHTML = "<span>Швидкість вітру: </span><span></span><span>" + data.current.wind_kph + " км/год" + "</span>";
       document.querySelector(".hamidity").innerHTML = "<span>Вологість: </span><span></span><span>" + data.current.humidity + "%" + "</span>";
@@ -20,11 +23,12 @@ function fetchWeather(city) {
 
       data.forecast.forecastday.forEach(day => {
         const forecastEl = document.createElement("div");
+        const temperature = degrees ? day.day.avgtemp_c + '°C' : day.day.avgtemp_f + '°F'
         forecastEl.className = "forecast-day";
         forecastEl.innerHTML = `
           <div class="date">${day.date}</div>
           <img src="https:${day.day.condition.icon}" alt="icon">
-          <div>${day.day.avgtemp_c}°C</div>
+          <div> ${temperature}</div>
           <div>${day.day.condition.text}</div>
         `;
         forecastGrid.appendChild(forecastEl);
@@ -32,13 +36,25 @@ function fetchWeather(city) {
       });
     })
     .catch(err => {
-      // alert("Помилка отримання погоди!");
+      alertify.defaults = {
+        notifier: {
+          delay: 5,
+          position: 'top-right',
+          closeButton: true,
+          classes: {
+            base: "alertify-notifier",
+            prefix: "alertify-notifier"
+          }
+        }
+      };
+
+      alertify.error('Такого міста не існує!');
       console.error(err);
     });
 }
 
 // Ініціалізація з першого міста
-fetchWeather("Kyiv");
+fetchWeather("Kyiv", true);
 
 // Слухач події зміни міста
 citySelect.addEventListener("input", (e) => {
@@ -53,7 +69,8 @@ citySelect.addEventListener("input", (e) => {
 });
 
 document.querySelector("#search").addEventListener("click", () => {
-  fetchWeather(citySelect.value);
+  city = citySelect.value
+  fetchWeather(city, d);
 })
 
 search.addEventListener("submit", (e) => {
@@ -95,4 +112,21 @@ function temperatureToColor(temp) {
 function updateLabel() {
   const toggle = document.getElementById('toggleColor').checked;
   document.getElementById('switchLabel').innerText = toggle ? "Цельсія" : "Фаренгейт";
+  toggle ? fetchWeather(city, true) : fetchWeather(city, false)
+  d = toggle
 }
+
+
+
+const settingsButton = document.querySelector(".settings");
+const switchWrapper = document.querySelector(".switch-wrapper");
+
+settingsButton.addEventListener("click", function () {
+  // Перевіряємо поточний стан
+  if (switchWrapper.style.display === "none" || switchWrapper.style.display === "") {
+    switchWrapper.style.display = "block";
+  } else {
+    switchWrapper.style.display = "none";
+  }
+});
+
