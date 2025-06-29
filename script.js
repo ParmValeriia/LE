@@ -5,7 +5,7 @@ let d = true
 const search = document.querySelector("#citySelect")
 
 function fetchWeather(city, degrees) {
-  fetch(`http://api.weatherapi.com/v1/forecast.json?key=21f8c4c234cd480aaf5111440250106&q=${city}&days=14&aqi=no&alerts=no`)
+  fetch(`https://api.weatherapi.com/v1/forecast.json?key=21f8c4c234cd480aaf5111440250106&q=${city}&days=14&aqi=no&alerts=no`)
     .then(res => res.json())
     .then(data => {
       document.body.style.background = temperatureToColor(data.current.temp_c)
@@ -59,7 +59,7 @@ fetchWeather("Kyiv", true);
 // Слухач події зміни міста
 citySelect.addEventListener("input", (e) => {
   // fetchWeather(e.target.value);
-  fetch("http://api.weatherapi.com/v1/search.json?key=21f8c4c234cd480aaf5111440250106&q=" + e.target.value).then(res => res.json()).then(data => {
+  fetch("https://api.weatherapi.com/v1/search.json?key=21f8c4c234cd480aaf5111440250106&q=" + e.target.value).then(res => res.json()).then(data => {
     document.querySelector("#city").innerHTML = ""
     data.forEach(c => {
       document.querySelector("#city").innerHTML += `<option value="${c.name}"></option>`
@@ -78,14 +78,6 @@ search.addEventListener("submit", (e) => {
   fetchWeather(document.querySelector("#search").value);
 });
 
-// const citySearch = document.getElementById("citySearch");
-
-// citySearch.addEventListener("change", () => {
-//   const city = citySearch.value.trim();
-//   if (city) {
-//     fetchWeather(city);
-//   }
-// });
 
 
 document.querySelector("#forecast").addEventListener("click", function () {
